@@ -1,0 +1,320 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap');
+
+:root {
+
+    --moon-icon: url(images/icon-moon.svg);
+    --sun-icon: url(images/icon-sun.svg);
+    --bg-light: url(images/bg-mobile-light.jpg);
+    --bg-dark: url(images/bg-mobile-dark.jpg);
+
+    --bg-light-desktop: url(images/bg-desktop-light.jpg);
+    --bg-dark-desktop: url(images/bg-desktop-dark.jpg);
+
+    --primary-font: 'Josefin Sans', sans-serif;
+
+    --width-mobile: 90%;
+    --width-desktop: 38%;
+
+    --font-normal: 400;
+    --font-bold: 700;
+
+    --size-task-desktop: 18px;
+    --size-task-mobile: 14px;
+    --size-heading-desktop: 42px;
+    --size-heading-mobile: 28px;
+
+    --container-padding: 3rem 0 1rem;
+
+    --white: #fff;
+    --bright-blue: hsl(220, 98%, 61%);
+    --check-bg: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+
+    --very-light-gray: hsl(0, 0%, 98%);
+    --very-light-grayish-blue: hsl(236, 33%, 92%);
+    --light-grayish-blue: hsl(233, 11%, 84%);
+    --dark-grayish-blue: hsl(236, 9%, 61%);
+    --very-dark-grayish-blue: hsl(235, 19%, 35%);
+
+    --primary-color: var(--very-dark-grayish-blue);
+    --secondary-color: var(--dark-grayish-blue);
+    --task-color: var(--primary-color);
+    --footer-color: var(--secondary-color);
+    --divider-color: var(--very-light-grayish-blue);
+    --bg-body: var(--very-light-gray);
+    --bg-color: var(--white);
+    --heading-color: var(--very-light-gray);
+    --body-bg: var(--bg-light);
+    --body-bg-desktop: var(--bg-light-desktop);
+    --theme-icon: var(--moon-icon);
+    --container-width: var(--width-mobile);
+    --size-heading: var(--size-heading-mobile);
+    --size-task: var(--size-task-mobile);
+}
+
+[data-theme="dark"] {
+    --very-dark-blue: hsl(235, 21%, 11%);
+    --very-dark-desaturated-blue: hsl(235, 24%, 19%);
+    --light-grayish-blue: hsl(234, 39%, 85%);
+    --light-grayish-blue-hover: hsl(236, 33%, 92%);
+    --dark-grayish-blue: hsl(234, 11%, 52%);
+    --very-dark-grayish-blue: hsl(233, 14%, 35%);
+    --very-dark-grayish-blue: hsl(237, 14%, 26%);
+
+    --primary-color: var(--bright-blue);
+    --secondary-color: var(--very-light-grayish-blue);
+    --task-color: var(--dark-grayish-blue);
+    --bg-body: var(--very-dark-blue);
+    --bg-color: var(--very-dark-grayish-blue);
+    --heading-color: var(--very-light-gray);
+    --body-bg: var(--bg-dark);
+    --body-bg-desktop: var(--bg-dark-desktop);
+    --theme-icon: var(--sun-icon);
+}
+
+input {
+    font-family: var(--primary-font);
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+body {
+    margin: 0;
+    background-image: var(--body-bg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    font-family: var(--primary-font);
+    background-color: var(--bg-body);
+    transition: all 600ms;
+}
+
+.container {
+    width: var(--container-width);
+    margin: 0 auto;
+    padding: var(--container-padding);
+    background-color: transparent;
+}
+
+.header-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-text {
+    font-size: var(--size-heading);
+    color: var(--heading-color);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 16px;
+}
+
+.main-content {
+    margin: 3rem 0rem 1rem;
+}
+
+.todo-box {
+    padding: 22px 24px;
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;  
+}
+
+.new-todo-box {
+    border-radius: 8px;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.empty-circle {
+    border: 1px solid var(--divider-color);
+    border-radius: 50%;
+    margin-right: 24px;
+}
+
+.theme {
+    width: 26px;
+}
+
+.theme::before {
+    content: var(--theme-icon);
+}
+
+.cross::before {
+    content: url(images/icon-cross.svg);
+}
+
+.check {
+    background: var(--check-bg);
+}
+
+.check::before {
+    content: url(images/icon-check.svg);
+    display: inline-block;
+    line-height: 26px;
+    transform: translateX(6px);
+}
+
+.new-todo-input {
+    flex: 1;
+    border: none;
+    font-size: var(--size-task);
+    padding-top: 3px;
+    outline: none;
+    color: var(--task-color);
+    background-color: transparent;
+}
+
+.todo-list-box {
+    margin: 25px 0;
+    background-color: var(--bg-color);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+ul#todoList[data-state="all"] > li.todo-list-item {
+    display: flex;
+}
+
+ul#todoList[data-state="active"] > li.todo-list-item.completed {
+    display: none;
+}
+
+ul#todoList[data-state="completed"] > li.todo-list-item:not(.completed) {
+    display: none;
+}
+
+.todo-list {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+    background-color: var(--bg-body);
+    border-radius: 8px 8px 0 0;
+    transition: all 600ms;
+}
+
+.todo-list-item {
+    border-bottom: 1px solid var(--divider-color);
+    transition: all 600ms;
+}
+
+.todo-list-item.completed .empty-circle {
+    background: var(--check-bg);
+}
+
+.todo-list-item.completed .empty-circle::before {
+    content: url(images/icon-check.svg);
+    display: inline-block;
+    line-height: 26px;
+    transform: translateX(6px);
+}
+
+.todo-list-item.dragged {
+    transform: scale(1.1);
+    margin: 1rem .5rem;
+}
+
+.todo-list-item .todo-text {
+    padding-right: 1rem;
+    flex: 1;
+    font-size: var(--size-task);
+    line-height: 22px;
+    color: var(--task-color);
+    font-weight: var(--font-normal);
+    cursor: pointer;
+}
+
+ul#todoList[data-state="all"] > li.todo-list-item.completed > .todo-text {
+    text-decoration: line-through;
+    opacity: .3;
+}
+
+.todo-footer {
+    display: flex;
+    padding: 16px 24px;
+    justify-content: space-between;
+    font-size: 14px;
+    line-height: 24px;
+    color: var(--footer-color);
+}
+
+.clear-items {
+    cursor: pointer;
+}
+
+.clear-items:hover {
+    color: var(--primary-color);
+
+}
+
+.todo-states {
+    
+}
+
+.todo-states.mobile-only {
+    padding: 1rem 4rem;
+    border-radius: 8px;
+}
+
+.todo-states.desktop-only .state {
+    padding: 0 8px;
+}
+
+.todo-states .state {
+    font-size: 16px;
+    color: var(--footer-color);
+    font-weight: var(--font-bold);
+    cursor: pointer;
+}
+
+.state:hover {
+    color: var(--primary-color);
+}
+
+.state.active {
+    color: var(--bright-blue);
+}
+
+.helper-text {
+    text-align: center;
+    color: var(--secondary-color);
+    font-size: 14px;
+    margin-top: 3rem;
+}
+
+.desktop-only {
+    display: none;
+}
+
+@media only screen and (min-width: 768px) {
+    :root {
+        --body-bg: var(--body-bg-desktop);
+     }
+
+}
+
+@media only screen and (min-width: 1024px) {
+    :root {
+        --container-width: var(--width-desktop);
+        --container-padding: 5rem 0 1rem;
+        --size-heading: var(--size-heading-desktop);
+        --size-task: var(--size-task-desktop);
+
+
+    }
+
+    .mobile-only {
+        display: none;
+    }
+
+    .desktop-only {
+        display: block;
+    }
+}

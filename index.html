@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Todo app</title>
+
+  <link rel="stylesheet" href="style.css" >
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style>
+</head>
+<body>
+  <!-- Main Container -->
+  <div class="container">
+    <header>
+      <div class="header-row">
+        <span class="header-text">Todo</span>
+        <span id="themeBtn" class="icon theme"></span>
+      </div>
+    </header>
+    <main class="main-content">
+
+      <!-- Add new todo item -->
+      <div class="todo-box new-todo-box">
+        <span class="icon empty-circle"></span>
+        <input id="todoInput" class="new-todo-input" type="text" placeholder="Create a new todo...">
+      </div>
+
+      <!-- Todo List -->
+      <div class="todo-list-box">
+
+        <ul id="todoList" class="todo-list" data-state="all">
+          <!-- <li class="todo-list-item">
+            <span class="icon empty-circle"></span>
+            <span class="todo-text">Read for 1 hr</span>
+            <span class="icon cross"></span>
+          </li>
+          <li class="todo-list-item">
+            <input type="checkbox">
+            <span class="icon empty-circle check"></span>
+            <span class="todo-text">Play for 2 hr</span>
+            <span class="icon cross"></span>
+          </li> -->
+        </ul>
+        <div class="todo-footer">
+          <span class="todo-count">
+            <span id="count" class="count">0</span> items left
+          </span>
+          <div id="todoTab" class="todo-states desktop-only">
+            <span class="state active">All</span>
+            <span class="state">Active</span>
+            <span class="state">Completed</span>
+          </div>
+          <span id="clearCompleted" class="clear-items"> Clear Completed </span>
+        </div>
+      </div>
+
+      <div id="todoTab" class="todo-box todo-states mobile-only">
+        <span class="state active">All</span>
+        <span class="state">Active</span>
+        <span class="state">Completed</span>
+      </div>
+    </main>
+
+    <div class="helper-text"> Drag and drop to reorder list</div
+  
+  </div>
+  <script src="script.js" ></script>
+</body>
+</html>
+
+
