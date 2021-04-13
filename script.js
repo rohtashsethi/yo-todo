@@ -89,6 +89,7 @@
         const todoInputEL = document.getElementById('todoInput');
         const todoListEL = document.getElementById('todoList');
         const todoTabEL = document.getElementById('todoTab');
+        const todoTabDesktopEL = document.getElementById('todoTabDesktop');
         const themeBtn = document.getElementById('themeBtn');
         const clearCompletedBtn = document.getElementById('clearCompleted');
 
@@ -160,16 +161,24 @@
             }
         });
 
-        todoTabEL.addEventListener('click', function(e) {
-            if(e.target.tagName === 'SPAN') {
-                Array.from(todoTabEL.children).forEach(el => {
-                    el.classList.remove('active');
+        function handleTodoStates(e) {
+            if(e.target.tagName === 'SPAN' && !e.target.classList.contains('active')) {
+                const items = document.querySelectorAll('.todo-states span.state');
+                Array.from(items).forEach(el => {
+                    if (el.innerText === e.target.innerText) {
+                        el.classList.toggle('active');
+                    } else {
+                        el.classList.remove('active'); 
+                    }
                 });
                 const state = String(e.target.innerText).toLowerCase();
-                setTodoState(state);
-                e.target.classList.toggle('active');
+                setTodoState(state);                
             }
-        });
+        }
+
+        todoTabEL.addEventListener('click', handleTodoStates);
+        todoTabDesktopEL.addEventListener('click', handleTodoStates);
+
 
         themeBtn.addEventListener('click', function (e) {
             if(e.target.tagName === 'SPAN') {
