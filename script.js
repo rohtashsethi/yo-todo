@@ -84,7 +84,20 @@
         todoListEL.setAttribute('data-state', state);
     }
 
+    function registerServiceWorker() {
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js').then(function(registration) {
+                // Registration was successful
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
+              }, function(err) {
+                // registration failed :(
+                console.log('ServiceWorker registration failed: ', err);
+              });
+        }
+    }
+
     function initializeApp() {
+        registerServiceWorker();
         const todoList = new TodoList();
         const todoInputEL = document.getElementById('todoInput');
         const todoListEL = document.getElementById('todoList');
