@@ -89,11 +89,43 @@
             navigator.serviceWorker.register('/sw.js').then(function(registration) {
                 // Registration was successful
                 console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                notificationSetup();
               }, function(err) {
                 // registration failed :(
                 console.log('ServiceWorker registration failed: ', err);
               });
         }
+    }
+
+    function notificationSetup() {
+        if (!('Notification' in window)) {
+            console.log('Notifications not suppported!!');
+            return;
+        }
+        if (Notification.permission === 'granted') {
+            console.log('Notifications are allowed!!');
+            return;
+        }
+        if (Notification.permission !== 'denied') {
+            Notification.requestPermission().then(p => {
+                if (p === 'granted') {
+                    console.log('Notifications are allowed!!');
+                }
+            });
+        }
+    }
+
+    function showNotification(title, body) {
+        let notif = new Notification(title, {
+            body: body ? body : ''
+        });
+
+        notif.addEventListener('error', ev => {
+            console.error('There was a problem', ev);
+        });
+        notif.addEventListener('click', ev => {
+            console.log('Notification clicked');
+        });
     }
 
     function initializeApp() {
