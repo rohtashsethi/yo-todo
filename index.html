@@ -22,7 +22,7 @@
   <div class="container">
     <header>
       <div class="header-row">
-        <span class="header-text">Todo</span>
+        <span id="appHeading" aria-label="Yo Todo" role="heading" class="header-text">Yo Todo</span>
         <span id="themeBtn" class="icon theme"></span>
       </div>
     </header>
@@ -31,13 +31,13 @@
       <!-- Add new todo item -->
       <div class="todo-box new-todo-box">
         <span class="icon empty-circle"></span>
-        <input id="todoInput" class="new-todo-input" type="text" placeholder="Create a new todo...">
+        <input id="todoInput" class="new-todo-input" type="text" placeholder="Create a new todo..." autofocus>
       </div>
 
       <!-- Todo List -->
       <div class="todo-list-box">
 
-        <ul id="todoList" class="todo-list" data-state="all">
+        <ul aria-labelledby="appHeading" id="todoList" class="todo-list" data-state="all">
           <!-- <li class="todo-list-item">
             <span class="icon empty-circle"></span>
             <span class="todo-text">Read for 1 hr</span>
@@ -54,19 +54,19 @@
           <span class="todo-count">
             <span id="count" class="count">0</span> items left
           </span>
-          <div id="todoTabDesktop" class="todo-states desktop-only" data-active="All">
-            <span class="state active">All</span>
-            <span class="state">Active</span>
-            <span class="state">Completed</span>
+          <div role="tablist" aria-label="Todo States" id="todoTabDesktop" class="todo-states desktop-only" data-active="All">
+            <span role="tab" tabindex="0" aria-selected="true" tabindex="0" class="state active">All</span>
+            <span role="tab" tabindex="0" aria-selected="false" tabindex="0" class="state">Active</span>
+            <span role="tab" tabindex="0" aria-selected="false" tabindex="0" class="state">Completed</span>
           </div>
-          <span id="clearCompleted" class="clear-items"> Clear Completed </span>
+          <span role="button" tabindex="0" id="clearCompleted" class="clear-items"> Clear Completed </span>
         </div>
       </div>
 
-      <div id="todoTab" class="todo-box todo-states mobile-only" data-active="All">
-        <span class="state active">All</span>
-        <span class="state">Active</span>
-        <span class="state">Completed</span>
+      <div role="tablist" aria-label="Todo States" id="todoTab" class="todo-box todo-states mobile-only" data-active="All">
+        <span role="tab" tabindex="0" aria-selected="true" tabindex="0" class="state active">All</span>
+        <span role="tab" tabindex="0" aria-selected="false" tabindex="0" class="state">Active</span>
+        <span role="tab" tabindex="0" aria-selected="false" tabindex="0" class="state">Completed</span>
       </div>
     </main>
 

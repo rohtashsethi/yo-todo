@@ -34,6 +34,8 @@
         const todoListEL = document.getElementById('todoList');
         const li = document.createElement('li');
         li.setAttribute('class', 'todo-box todo-list-item');
+        li.setAttribute('tabindex', '0');
+        li.setAttribute('aria-label', String(taskDesc));
         li.draggable = true;
 
         const checkbox = document.createElement('input');
@@ -96,6 +98,51 @@
         }
     }
 
+    function completeTask(taskEl) {
+        const checkbox = taskEl.firstElementChild;
+        checkbox.checked = !checkbox.checked;
+        taskEl.classList.toggle('completed');
+    }
+
+    function deleteTask(taskEl) {
+        taskEl.animate([
+            // keyframes
+            { transform: `translateX(-${taskEl.offsetWidth}px) scale(0, 0)` }
+          ], {
+            // timing options
+            duration: 200,
+            iterations: 1
+        }).finished.then(() => {
+            taskEl.remove();
+            updateTodoCount();
+        });
+    }
+
+    function moveFocusToTask(taskEl, direction) {
+        if (taskEl && direction === 'next' && taskEl.nextElementSibling) {
+            taskEl.nextElementSibling.focus();
+            return;
+        }
+        if (taskEl && direction === 'prev' && taskEl.previousElementSibling) {
+            taskEl.previousElementSibling.focus();
+            return;
+        }
+    }
+
+    function moveTask(taskEl, direction) {
+        const todoListEL = document.getElementById('todoList');
+        if (taskEl && direction === 'next' && taskEl.nextElementSibling) {
+            todoListEL.insertBefore(taskEl.nextElementSibling, taskEl);
+            taskEl.focus();
+            return;
+        }
+        if (taskEl && direction === 'prev' && taskEl.previousElementSibling) {
+            todoListEL.insertBefore(taskEl, taskEl.previousElementSibling);
+            taskEl.focus();
+            return;
+        }
+    }
+
     function initializeApp() {
         registerServiceWorker();
         const todoList = new TodoList();
@@ -122,27 +169,44 @@
             }
         });
 
+        todoListEL.addEventListener('keyup', function(e) {
+            if (e.target.tagName === 'LI') {
+                switch(e.code) {
+                    case 'Home': 
+                        this.firstElementChild.focus();
+                        break;
+                    case 'End':
+                        this.lastElementChild.focus();
+                        break;
+                    case 'Enter': 
+                    case 'Space':
+                        completeTask(e.target);
+                        break;
+                    case 'Delete':
+                        deleteTask(e.target);
+                        break;
+                    case 'ArrowRight':
+                    case 'ArrowDown':
+                        e.ctrlKey ? moveTask(e.target, 'next') : moveFocusToTask(e.target, 'next');
+                        break;
+                    case 'ArrowLeft':
+                    case 'ArrowUp':
+                        e.ctrlKey ? moveTask(e.target, 'prev') : moveFocusToTask(e.target, 'prev');
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+
         todoListEL.addEventListener('click', function(e){
             if(e.target.tagName === 'SPAN') {
                 const dataset = e.target.dataset;
                 if (dataset && dataset.action === 'complete') {
-                    const parentLI = e.target.parentElement;
-                    const checkbox = parentLI.firstElementChild;
-                    checkbox.checked = !checkbox.checked;
-                    parentLI.classList.toggle('completed');
+                    completeTask(e.target.parentElement);
                 } 
                 if (dataset && dataset.action === 'delete') {
-                    e.target.parentElement.animate([
-                        // keyframes
-                        { transform: `translateX(-${ e.target.parentElement.offsetWidth}px) scale(0, 0)` }
-                      ], {
-                        // timing options
-                        duration: 200,
-                        iterations: 1
-                    }).finished.then(() => {
-                        e.target.parentElement.remove();
-                        updateTodoCount();
-                    });
+                    deleteTask(e.target.parentElement);
                 } 
             }
         });
